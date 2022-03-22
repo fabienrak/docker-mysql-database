@@ -1,0 +1,23 @@
+version: "3.8"
+services:
+  app-db-mysql:
+    image:  mysql
+    restart:  always
+    environment:
+      MYSQL_ROOT_PASSWORD:  admindev
+    volumes:
+      - mysql-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+  app-phpmyadmin:
+    image:  phpmyadmin
+    restart:  always
+    environment:
+      PMA_HOST: app-db-mysql
+      PMA_USER: root
+      PMA_PASSWORD: admindev
+    ports:
+      - "8080:80"
+volumes:
+  mysql-data:        
